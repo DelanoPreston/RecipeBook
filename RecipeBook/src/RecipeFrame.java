@@ -64,6 +64,9 @@ public class RecipeFrame extends JFrame{
 		 * TextField creation
 		 ************************************************/
 		inputBox = new JTextArea();
+		inputBox.setLineWrap(true);
+		inputBox.setWrapStyleWord(true);
+		inputBox.setEditable(false);
 		this.add(inputBox, BorderLayout.CENTER);
 		
 		/************************************************
@@ -125,7 +128,10 @@ public class RecipeFrame extends JFrame{
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			if(arg0.getActionCommand().equals("Add")){
-				System.out.println("Add");
+//				System.out.println("Add");
+				IOClass io = new IOClass();
+				
+				io.LoadRecipes();
 			}
 			if(arg0.getActionCommand().equals("Print")){
 				System.out.println("Print");
@@ -135,15 +141,18 @@ public class RecipeFrame extends JFrame{
 			}
 //			String[] recipeTypeArray = {"Dessert", "CrockPot", "Main Dish", "Appetizer", "Breads", "Soups", "Salads"};
 			if(arg0.getSource().toString().contains("Dessert")){
-				String tempName = "poptartums";
-				String[] tempIngerd = {"1C. water", "2lbs. pop", "3 tart", "4 umms"};
-				String[] tempInstru = {"add the water and the pop", 
-						"then add the tarts", 
-						"then add the umms", 
-						"cook for 20 minutes"};
-				Recipe recipe = new Recipe(tempName, tempIngerd, tempInstru);
 				
-				inputBox.append(recipe.toString());
+				
+//				String tempName = "poptartums";
+//				RecipeType[] type = {RecipeType.Snack};
+//				String[] tempIngerd = {"1C. water", "2lbs. pop", "3 tart", "4 umms", "5 ughs", "6skjdhf"};
+//				String[] tempInstru = {"add the water and the pop----------- ------------------------------ --------------------------------------------------words", 
+//						"then add the tarts----------------- ---------------------- ----------------------------------- ----------------words", 
+//						"then add the umms-------- ------------------------------- ------------------------------------ ----------------words", 
+//						"cook for 20 minutes---------------- ------------------------------- ----------------------- ---------------------words"};
+//				Recipe recipe = new Recipe(tempName, tempIngerd, tempInstru, type);
+//				
+//				inputBox.append(recipe.SaveRecipe());
 			}
 		}
 		
