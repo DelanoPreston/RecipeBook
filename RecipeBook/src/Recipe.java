@@ -14,11 +14,23 @@ public class Recipe extends Object{
 	@Override
 	public String toString(){
 		String temp = "";
+		int rows;
+		
+		//set rows
+		if((ingredients.length % 2) == 0)
+			rows = ingredients.length / 2;
+		else
+			rows = (ingredients.length / 2) + 1;
 		
 		temp += name + "\r\n";
 		temp += "\r\n" + "Ingredients:" + "\r\n";
-		for(int i = 0; i < ingredients.length; i++){
-			temp += ingredients[i] + "\r\n";
+		for(int i = 0; i < rows; i++){
+			String t1 = ingredients[i];
+			if(i + rows < ingredients.length)
+				t1 += "\t\t" + ingredients[rows + i];
+			t1 += "\r\n";
+			
+			temp += t1;
 		}
 		temp += "\r\n" + "Instructions:" + "\r\n";
 		for(int i = 0; i < instructions.length; i++){
