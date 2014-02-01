@@ -7,13 +7,12 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 //		ContentBank.ContentLoader();
-		JFrame frame = new JFrame();
-		JPanel gamePanel = new JPanel();
-		frame.setSize(550, 550);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setResizable(false);
-		frame.setVisible(true);
-		frame.add(gamePanel);
-		frame.setVisible(true);
+		RecipeFrame recipeFrame = new RecipeFrame("Recipe Book");
+		recipeFrame.setSize(650, 450);
+		recipeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		recipeFrame.setResizable(false);
+		recipeFrame.setVisible(true);
+//		recipeFrame.add(gamePanel);
+		recipeFrame.setVisible(true);
 	}
 }
