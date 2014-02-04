@@ -108,6 +108,7 @@ public class RecipeFrame extends JFrame{
 		 ************************************************/
 		JScrollPane recipeList = new JScrollPane();
 		recipeList.setPreferredSize(new Dimension(200, 80));
+		
 		this.add(recipeList, BorderLayout.AFTER_LINE_ENDS);
 		
 		/************************************************
@@ -169,10 +170,10 @@ temp.addActionListener(buttonListener);
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			if(arg0.getActionCommand().equals("Add")){
-				
+				System.out.println(System.getProperty("user.home") + "\\My Documents");
 			}
 			if(arg0.getActionCommand().equals("Print")){
-				inputBox.append(recipes.get(0).toString());
+				inputBox.setText(recipes.get(0).toString());
 			}
 			if(arg0.getActionCommand().equals("Edit")){
 				
@@ -198,8 +199,8 @@ temp.addActionListener(buttonListener);
 				Recipe recipe = new Recipe(name, ingr, inst, type);
 				recipes.add(recipe);
 				
-				recipe.name = "Other Chicken";
-				recipes.add(recipe);
+				Recipe recipe2 = new Recipe("wonderBread", ingr, inst, type);
+				recipes.add(recipe2);
 			}
 		}
 	}
@@ -217,9 +218,8 @@ temp.addActionListener(buttonListener);
 				recipesToLoad.add("Chicken");
 				recipes = IOClass.LoadRecipes(recipesToLoad);
 			}
-			if(source.getText().equalsIgnoreCase("Refresh Recipe")){
-				
-				
+			if(source.getText().equalsIgnoreCase("Refresh Recipes")){
+				inputBox.setText("");
 			}
 			if(source.getText().equalsIgnoreCase("Exit")){
 				

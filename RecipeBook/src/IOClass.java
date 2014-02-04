@@ -19,7 +19,9 @@ public class IOClass {
 			recipeProps.setProperty("Instruction" , CreateArrayString(recipes.get(i).instructions));
 			
 			try {
-				out = new FileOutputStream(new File("Recipes/" + recipes.get(i).name + ".prop"));
+//				out = new FileOutputStream(new File("Recipes/" + recipes.get(i).name + ".prop"));
+				out = new FileOutputStream(new File(System.getProperty("user.home") + "\\My Documents\\Recipes\\" + recipes.get(i).name + ".prop"));
+//				System.out.println(System.getProperty("user.home") + "\\My Documents\\");
 				recipeProps.store(out, "---No Comment---");
 				out.close();
 			} catch (IOException e) {
