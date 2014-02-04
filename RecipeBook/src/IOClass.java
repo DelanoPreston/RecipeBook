@@ -11,26 +11,30 @@ import java.util.Scanner;
 public class IOClass {
 	
 	public static Boolean SaveRecipes(List<Recipe> recipes){
-		
-		
+		Properties applicationProps = new Properties();
 		FileOutputStream out;
-		try {
-			Properties applicationProps = new Properties();
-			applicationProps.setProperty("RecipeName", "Chicken");
-			applicationProps.setProperty("Recipe2Name", recipes.get(0).name);
+		
+		for(int i = 0; i < recipes.size(); i++){
+			for(int j = 0; j < recipes.get(i).type.length; j++){
+				applicationProps.setProperty("RecipeType" + j, recipes.get(i).type[i].toString());
+			}
+			for(int k = 0; k < recipes.get(i).ingredients.length; k++){
+				applicationProps.setProperty("Ingredient" + k, recipes.get(i).ingredients[i]);
+			}
+			for(int l = 0; l < recipes.get(i).instructions.length; l++){
+				applicationProps.setProperty("Instruction" + l, recipes.get(i).instructions[l]);
+			}
 			
-//			FileWriter out = new FileWriter("chicken.prop");
-			out = new FileOutputStream(new File("recipes2.prop"));
-			applicationProps.store(out, "---No Comment---");
-			out.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return false;
+			try {
+				out = new FileOutputStream(new File("Recipes/" + recipes.get(i).name + ".prop"));
+				applicationProps.store(out, "---No Comment---");
+				out.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return false;
+			}
 		}
-		
-		
-		
 		return true;
 	}
 	
