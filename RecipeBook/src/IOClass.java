@@ -41,16 +41,19 @@ public class IOClass {
 				in = new FileInputStream("Recipes/" + recipesToLoad.get(i) + ".prop");
 				recipeProps.load(in);
 				
-				String[] temp1 = recipeProps.getProperty("RecipeType").split("|");
-				String[] tempIngr = recipeProps.getProperty("Ingredients").split("|");
-				String[] tempInst = recipeProps.getProperty("Instruction").split("|");
+				String t = recipeProps.getProperty("RecipeType");
+				String[] temp1 = t.split("\\|");
+				t = recipeProps.getProperty("Ingredients");
+				String[] tempIngr = t.split("\\|");
+				t = recipeProps.getProperty("Instruction");
+				String[] tempInst = t.split("\\|");
 				
 				RecipeType[] tempType = new RecipeType[temp1.length];
 				for(int j = 0; j < temp1.length; j++){
 					tempType[j] = RecipeType.valueOf(temp1[j]);
 				}
 				
-				Recipe temp = new Recipe(recipesToLoad.get(i), tempInst, tempIngr, tempType);
+				Recipe temp = new Recipe(recipesToLoad.get(i), tempIngr, tempInst, tempType);
 				recipes.add(temp);
 				
 				in.close();

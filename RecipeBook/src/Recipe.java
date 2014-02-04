@@ -10,6 +10,13 @@ public class Recipe extends Object{
 		
 	}
 	
+	/**
+	 * Constructor for Recipe Object
+	 * @param inName - name
+	 * @param inIngredients - ingredients
+	 * @param inInstructions - instructions
+	 * @param inType - type
+	 */
 	public Recipe(String inName, String[] inIngredients, String[] inInstructions, RecipeType[] inType){
 		rating = 1;
 		name = inName;
@@ -18,6 +25,14 @@ public class Recipe extends Object{
 		type = inType;
 	}
 	
+	/**
+	 * Constructor for Recipe Object
+	 * @param inName - name
+	 * @param inIngredients - ingredients
+	 * @param inInstructions - instructions
+	 * @param inType - type
+	 * @param inRating - rating
+	 */
 	public Recipe(String inName, String[] inIngredients, String[] inInstructions, RecipeType[] inType, int inRating){
 		rating = inRating;
 		name = inName;

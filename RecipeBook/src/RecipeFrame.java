@@ -197,6 +197,9 @@ temp.addActionListener(buttonListener);
 				
 				Recipe recipe = new Recipe(name, ingr, inst, type);
 				recipes.add(recipe);
+				
+				recipe.name = "Other Chicken";
+				recipes.add(recipe);
 			}
 		}
 	}
@@ -211,7 +214,7 @@ temp.addActionListener(buttonListener);
 			}
 			if(source.getText().equalsIgnoreCase("Load Recipe")){
 				List<String> recipesToLoad = new ArrayList<String>();
-				recipesToLoad.add("poptartums");
+				recipesToLoad.add("Chicken");
 				recipes = IOClass.LoadRecipes(recipesToLoad);
 			}
 			if(source.getText().equalsIgnoreCase("Refresh Recipe")){
