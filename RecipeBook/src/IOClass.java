@@ -11,10 +11,9 @@ import java.util.Scanner;
 public class IOClass {
 	
 	public static Boolean SaveRecipes(List<Recipe> recipes){
-		Properties recipeProps = new Properties();
-		FileOutputStream out;
-		
 		for(int i = 0; i < recipes.size(); i++){
+			Properties recipeProps = new Properties();
+			FileOutputStream out;
 			recipeProps.setProperty("RecipeType" , CreateArrayString(recipes.get(i).type));
 			recipeProps.setProperty("Ingredients" , CreateArrayString(recipes.get(i).ingredients));
 			recipeProps.setProperty("Instruction" , CreateArrayString(recipes.get(i).instructions));
