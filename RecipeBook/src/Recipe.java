@@ -60,35 +60,4 @@ public class Recipe extends Object{
 		
 		return temp;
 	}
-	
-	public String SaveRecipe(){
-		String temp = "";
-		String newLine = "\r\n";
-		
-		temp += "name=";
-		temp += name;
-		temp += newLine;
-		temp += "category=";
-		for(int i = 0; i < type.length; i++){
-			temp += type[i].toString();
-			if(i < type.length - 1)
-				temp += "|";
-		}
-		temp += newLine;
-		temp += "ingredients=";
-		for(int i = 0; i < ingredients.length; i++){
-			temp += ingredients[i];
-			if(i < ingredients.length - 1)
-				temp += "|";
-		}
-		temp += newLine;
-		temp += "instructions=";
-		for(int i = 0; i < instructions.length; i++){
-			temp += instructions[i];
-			if(i < instructions.length - 1)
-				temp += "|";
-		}
-		
-		return temp;
-	}
 }

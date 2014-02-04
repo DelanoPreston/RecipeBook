@@ -15,18 +15,18 @@ public class IOClass {
 		FileOutputStream out;
 		
 		for(int i = 0; i < recipes.size(); i++){
+			String tString = "";
 			for(int j = 0; j < recipes.get(i).type.length; j++){
 				recipeProps.setProperty("RecipeType|" + j, recipes.get(i).type[j].toString());
 			}
-			for(int k = 0; k < recipes.get(i).ingredients.length; k++){
-				recipeProps.setProperty("Ingredient|" + k, recipes.get(i).ingredients[k]);
-			}
-			for(int l = 0; l < recipes.get(i).instructions.length; l++){
-				recipeProps.setProperty("Instruction|" + l, recipes.get(i).instructions[l]);
-			}
+			recipeProps.setProperty("RecipeType" , CreateArrayString(recipes.get(i).type));
+			
+			recipeProps.setProperty("Ingredients" , CreateArrayString(recipes.get(i).ingredients));
+			
+			recipeProps.setProperty("Instruction" , CreateArrayString(recipes.get(i).instructions));
 			
 			try {
-				out = new FileOutputStream(new File("Recipes/" + recipes.get(i).name + ".prop"));
+				out = new FileOutputStream(new File("Recipes/" + recipes.get(i).name + "2.prop"));
 				recipeProps.store(out, "---No Comment---");
 				out.close();
 			} catch (IOException e) {
@@ -37,12 +37,60 @@ public class IOClass {
 		return true;
 	}
 	
+	private static String CreateArrayString(String[] inArray){
+		String temp = "";
+		for(int i = 0; i < inArray.length; i++){
+			temp += inArray[i];
+			if(i != inArray.length - 1)
+				temp += "|";
+		}
+		return temp;
+	}
+	
+	private static String CreateArrayString(RecipeType[] inArray){
+		String temp = "";
+		for(int i = 0; i < inArray.length; i++){
+			temp += inArray[i].toString();
+			if(i != inArray.length - 1)
+				temp += "|";
+		}
+		return temp;
+	}
+	
+	//many files, lots of keys
+//	public static Boolean SaveRecipes(List<Recipe> recipes){
+//		Properties recipeProps = new Properties();
+//		FileOutputStream out;
+//		
+//		for(int i = 0; i < recipes.size(); i++){
+//			for(int j = 0; j < recipes.get(i).type.length; j++){
+//				recipeProps.setProperty("RecipeType|" + j, recipes.get(i).type[j].toString());
+//			}
+//			for(int k = 0; k < recipes.get(i).ingredients.length; k++){
+//				recipeProps.setProperty("Ingredient|" + k, recipes.get(i).ingredients[k]);
+//			}
+//			for(int l = 0; l < recipes.get(i).instructions.length; l++){
+//				recipeProps.setProperty("Instruction|" + l, recipes.get(i).instructions[l]);
+//			}
+//			
+//			try {
+//				out = new FileOutputStream(new File("Recipes/" + recipes.get(i).name + ".prop"));
+//				recipeProps.store(out, "---No Comment---");
+//				out.close();
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//				return false;
+//			}
+//		}
+//		return true;
+//	}
+	
 	public static List<Recipe> LoadRecipes(List<String> recipesToLoad){
 		List<Recipe> recipes = new ArrayList<Recipe>();
 		Properties recipeProps = new Properties();
 		FileInputStream in;
 		
-		List<String> tempType = new ArrayList<String>();
+		List<RecipeType> tempType = new ArrayList<RecipeType>();
 		List<String> tempIngr = new ArrayList<String>();
 		List<String> tempInst = new ArrayList<String>();
 		
@@ -53,7 +101,8 @@ public class IOClass {
 				
 				for(int j = 0; j < recipeProps.stringPropertyNames().size(); j++){
 					if(recipeProps.containsKey("RecipeType|" + j)){
-						tempType.add(recipeProps.getProperty("RecipeType|" + j));
+						tempType.add(RecipeType.valueOf(recipeProps.getProperty("RecipeType|" + j)));
+//						String t = recipeProps.getProperty("RecipeType|" + j);
 					}
 					else
 						break;

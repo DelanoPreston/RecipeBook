@@ -68,6 +68,16 @@ public class RecipeFrame extends JFrame{
         tempMI.addActionListener(menuListener);
         fileMenu.add(tempMI);
         
+        tempMI = new JMenuItem("Refresh Recipes");
+        tempMI.getAccessibleContext().setAccessibleDescription("The Refresh File Menu Item");
+        tempMI.addActionListener(menuListener);
+        fileMenu.add(tempMI);
+        
+        tempMI = new JMenuItem("Exit");
+        tempMI.getAccessibleContext().setAccessibleDescription("The Exit File Menu Item");
+        tempMI.addActionListener(menuListener);
+        fileMenu.add(tempMI);
+        
         /****************
 		 * Edit Menu Item Creation
 		 ****************/
@@ -164,7 +174,6 @@ public class RecipeFrame extends JFrame{
 				
 			}
 		}
-		
 	}
 	
 	private class MenuListener implements ActionListener{
@@ -180,6 +189,14 @@ public class RecipeFrame extends JFrame{
 				recipesToLoad.add("poptartums");
 				recipes = IOClass.LoadRecipes(recipesToLoad);
 			}
+			if(source.getText().equalsIgnoreCase("Refresh Recipe")){
+				
+				
+			}
+			if(source.getText().equalsIgnoreCase("Exit")){
+				
+			}
+			
 		}
 		
 	}
