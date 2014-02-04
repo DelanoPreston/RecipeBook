@@ -11,26 +11,25 @@ import java.util.Scanner;
 public class IOClass {
 	
 	public static Boolean SaveRecipes(List<Recipe> recipes){
-		Properties applicationProps = new Properties();
+		Properties recipeProps = new Properties();
 		FileOutputStream out;
 		
 		for(int i = 0; i < recipes.size(); i++){
 			for(int j = 0; j < recipes.get(i).type.length; j++){
-				applicationProps.setProperty("RecipeType" + j, recipes.get(i).type[i].toString());
+				recipeProps.setProperty("RecipeType|" + j, recipes.get(i).type[j].toString());
 			}
 			for(int k = 0; k < recipes.get(i).ingredients.length; k++){
-				applicationProps.setProperty("Ingredient" + k, recipes.get(i).ingredients[i]);
+				recipeProps.setProperty("Ingredient|" + k, recipes.get(i).ingredients[k]);
 			}
 			for(int l = 0; l < recipes.get(i).instructions.length; l++){
-				applicationProps.setProperty("Instruction" + l, recipes.get(i).instructions[l]);
+				recipeProps.setProperty("Instruction|" + l, recipes.get(i).instructions[l]);
 			}
 			
 			try {
 				out = new FileOutputStream(new File("Recipes/" + recipes.get(i).name + ".prop"));
-				applicationProps.store(out, "---No Comment---");
+				recipeProps.store(out, "---No Comment---");
 				out.close();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				return false;
 			}
@@ -38,17 +37,50 @@ public class IOClass {
 		return true;
 	}
 	
-	public List<Recipe> LoadRecipes(){
+	public static List<Recipe> LoadRecipes(List<String> recipesToLoad){
 		List<Recipe> recipes = new ArrayList<Recipe>();
+		Properties recipeProps = new Properties();
+		FileInputStream in;
+		
+		List<String> tempType = new ArrayList<String>();
+		List<String> tempIngr = new ArrayList<String>();
+		List<String> tempInst = new ArrayList<String>();
 		
 		try{
-			Properties defaultProps = new Properties();
-			FileInputStream in = new FileInputStream("recipes.prop");
+			for(int i = 0; i < recipesToLoad.size(); i++){
+				in = new FileInputStream("Recipes/" + recipesToLoad.get(i) + ".prop");
+				recipeProps.load(in);
+				
+				for(int j = 0; j < recipeProps.stringPropertyNames().size(); j++){
+					if(recipeProps.containsKey("RecipeType|" + j)){
+						tempType.add(recipeProps.getProperty("RecipeType|" + j));
+					}
+					else
+						break;
+				}
+				for(int j = 0; j < recipeProps.stringPropertyNames().size(); j++){
+					if(recipeProps.containsKey("Ingredient|" + j))
+						tempIngr.add(recipeProps.getProperty("Ingredient|" + j));
+					else
+						break;
+				}
+				for(int j = 0; j < recipeProps.stringPropertyNames().size(); j++){
+					if(recipeProps.containsKey("Instruction|" + j))
+						tempInst.add(recipeProps.getProperty("Instruction|" + j));
+					else
+						break;
+				}
+				
+				String[] temp1 = tempIngr.toArray(new String[0]);
+				String[] temp2 = tempInst.toArray(new String[0]);
+				RecipeType[] temp3 = tempType.toArray(new RecipeType[0]);
+				
+				Recipe temp = new Recipe(recipesToLoad.get(i), temp1, temp2, temp3);
+				recipes.add(temp);
+				
+				in.close();
+			}
 			
-			
-			
-			defaultProps.load(in);
-			in.close();
 		}catch(IOException e){
 			e.printStackTrace();
 			return null;

@@ -22,6 +22,7 @@ import javax.swing.JTextArea;
 
 public class RecipeFrame extends JFrame{
 	JTextArea inputBox;
+	List<Recipe> recipes = new ArrayList<Recipe>();
 	
 	/**
 	 * not sure, need it to suppress warnings
@@ -151,26 +152,16 @@ public class RecipeFrame extends JFrame{
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			if(arg0.getActionCommand().equals("Add")){
-//				System.out.println("Add");
-				IOClass io = new IOClass();
 				
-				io.LoadRecipes();
 			}
 			if(arg0.getActionCommand().equals("Print")){
-				System.out.println("Print");
 				
 			}
 			if(arg0.getActionCommand().equals("Edit")){
-//				System.out.println("Edit");
 				
 			}
-//			String[] recipeTypeArray = {"Dessert", "CrockPot", "Main Dish", "Appetizer", "Breads", "Soups", "Salads"};
 			if(arg0.getSource().toString().contains("Dessert")){
 				
-				
-				
-				
-//				inputBox.append(recipe.SaveRecipe());
 			}
 		}
 		
@@ -182,20 +173,12 @@ public class RecipeFrame extends JFrame{
 		public void actionPerformed(ActionEvent arg0) {
 			JMenuItem source = (JMenuItem)(arg0.getSource());
 			if(source.getText().equalsIgnoreCase("Save Recipe")){
-				String tempName = "poptartums";
-				RecipeType[] type = {RecipeType.Snack};
-				String[] tempIngerd = {"1C. water", "2lbs. pop", "3 tart", "4 umms", "5 ughs", "6skjdhf"};
-				String[] tempInstru = {"add the water and the pop----------- ------------------------------ --------------------------------------------------words", 
-						"then add the tarts----------------- ---------------------- ----------------------------------- ----------------words", 
-						"then add the umms-------- ------------------------------- ------------------------------------ ----------------words", 
-						"cook for 20 minutes---------------- ------------------------------- ----------------------- ---------------------words"};
-				Recipe recipe = new Recipe(tempName, tempIngerd, tempInstru, type);
-				List<Recipe> recipes = new ArrayList<Recipe>();
-				recipes.add(recipe);
 				IOClass.SaveRecipes(recipes);
 			}
 			if(source.getText().equalsIgnoreCase("Load Recipe")){
-				System.out.println("not implemented yet");
+				List<String> recipesToLoad = new ArrayList<String>();
+				recipesToLoad.add("poptartums");
+				recipes = IOClass.LoadRecipes(recipesToLoad);
 			}
 		}
 		

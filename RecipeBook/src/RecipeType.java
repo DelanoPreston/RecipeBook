@@ -1,4 +1,5 @@
 
+
 public enum RecipeType {
 	Dessert,
 	MainDish,
@@ -8,4 +9,4 @@ public enum RecipeType {
 	Breads,
 	Soups,
 	Salads
-}
+	}

@@ -6,6 +6,10 @@ public class Recipe extends Object{
 	int rating;
 	RecipeType[] type;
 	
+	public Recipe(){
+		
+	}
+	
 	public Recipe(String inName, String[] inIngredients, String[] inInstructions, RecipeType[] inType){
 		rating = 1;
 		name = inName;
