@@ -119,7 +119,7 @@ public class RecipeFrame extends JFrame{
 		
 		//create buttons
 		JButton addButton = new JButton("Add");
-		JButton pringButton = new JButton("Print");
+		JButton printButton = new JButton("Print");
 		JButton editButton = new JButton("Edit");
 		
 		//create drop down
@@ -131,7 +131,7 @@ public class RecipeFrame extends JFrame{
 		buttonPane.add(Box.createHorizontalGlue());
 		buttonPane.add(addButton);
 		buttonPane.add(Box.createRigidArea(new Dimension(10, 0)));
-		buttonPane.add(pringButton);
+		buttonPane.add(printButton);
 		buttonPane.add(Box.createRigidArea(new Dimension(10, 0)));
 		buttonPane.add(editButton);
 		buttonPane.add(Box.createRigidArea(new Dimension(10, 0)));
@@ -141,9 +141,16 @@ public class RecipeFrame extends JFrame{
 		ButtonListener buttonListener = new ButtonListener();
 		recipeTypeComboBox.addActionListener(buttonListener);
 		addButton.addActionListener(buttonListener);
-		pringButton.addActionListener(buttonListener);
+		printButton.addActionListener(buttonListener);
 		editButton.addActionListener(buttonListener);
 		
+//////////////////////////////////////////////////////////////
+JButton temp = new JButton("temp");
+buttonPane.add(Box.createRigidArea(new Dimension(10, 0)));
+buttonPane.add(temp);
+temp.addActionListener(buttonListener);
+//////////////////////////////////////////////////////////////
+
 		this.add(buttonPane, BorderLayout.PAGE_END);
 		
 //		
@@ -165,13 +172,31 @@ public class RecipeFrame extends JFrame{
 				
 			}
 			if(arg0.getActionCommand().equals("Print")){
-				
+				inputBox.append(recipes.get(0).toString());
 			}
 			if(arg0.getActionCommand().equals("Edit")){
 				
 			}
 			if(arg0.getSource().toString().contains("Dessert")){
 				
+			}
+			if(arg0.getActionCommand().equals("temp")){
+				String name = "Chicken";
+				RecipeType[] type = new RecipeType[2];
+				String[] ingr = new String[3];
+				String[] inst = new String[3];
+				
+				type[0] = RecipeType.CrockPot;
+				type[1] = RecipeType.MainDish;
+				ingr[0] = "Chicken";
+				ingr[1] = "Broth";
+				ingr[2] = "Awesomeness";
+				inst[0] = "heat up chicken in broth";
+				inst[1] = "wait for 4 hours";
+				inst[2] = "add awesomeness";
+				
+				Recipe recipe = new Recipe(name, ingr, inst, type);
+				recipes.add(recipe);
 			}
 		}
 	}
@@ -196,6 +221,7 @@ public class RecipeFrame extends JFrame{
 			if(source.getText().equalsIgnoreCase("Exit")){
 				
 			}
+			
 			
 		}
 		
