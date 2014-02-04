@@ -1,13 +1,34 @@
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import java.util.Scanner;
 
 
 public class IOClass {
 	
-	public Boolean SaveRecipes(List<Recipe> recipes){
+	public static Boolean SaveRecipes(List<Recipe> recipes){
+		
+		
+		FileOutputStream out;
+		try {
+			Properties applicationProps = new Properties();
+			applicationProps.setProperty("RecipeName", "Chicken");
+			applicationProps.setProperty("Recipe2Name", recipes.get(0).name);
+			
+//			FileWriter out = new FileWriter("chicken.prop");
+			out = new FileOutputStream(new File("recipes2.prop"));
+			applicationProps.store(out, "---No Comment---");
+			out.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		
 		
 		
 		return true;
@@ -16,19 +37,18 @@ public class IOClass {
 	public List<Recipe> LoadRecipes(){
 		List<Recipe> recipes = new ArrayList<Recipe>();
 		
-		String mapFileData = null;
 		try{
-			mapFileData = OpenFile("recipes.txt");
+			Properties defaultProps = new Properties();
+			FileInputStream in = new FileInputStream("recipes.prop");
+			
+			
+			
+			defaultProps.load(in);
+			in.close();
 		}catch(IOException e){
 			e.printStackTrace();
 			return null;
 		}
-		
-		String[] recipeInfo = mapFileData.split("\r\n__M__\r\n");
-		//does recipe stuff
-		
-		
-		
 		return recipes;
 	}
 	

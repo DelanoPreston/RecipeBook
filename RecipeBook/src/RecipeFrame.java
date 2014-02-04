@@ -3,6 +3,8 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -12,10 +14,10 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 
 
 public class RecipeFrame extends JFrame{
@@ -45,15 +47,36 @@ public class RecipeFrame extends JFrame{
 		JMenu fileMenu = new JMenu("File");
 		JMenu editMenu = new JMenu("Edit");
 		JMenu helpMenu = new JMenu("Help");
+		JMenuItem tempMI;
+		MenuListener menuListener = new MenuListener();
 		
+		/****************
+		 * File Menu Item Creation
+		 ****************/
 		fileMenu.setMnemonic(KeyEvent.VK_F);
 		fileMenu.getAccessibleContext().setAccessibleDescription("The File Menu Item");
         menuBar.add(fileMenu);
         
+        tempMI = new JMenuItem("Save Recipe");
+        tempMI.getAccessibleContext().setAccessibleDescription("The Save File Menu Item");
+        tempMI.addActionListener(menuListener);
+        fileMenu.add(tempMI);
+        
+        tempMI = new JMenuItem("Load Recipe");
+        tempMI.getAccessibleContext().setAccessibleDescription("The Load File Menu Item");
+        tempMI.addActionListener(menuListener);
+        fileMenu.add(tempMI);
+        
+        /****************
+		 * Edit Menu Item Creation
+		 ****************/
         editMenu.setMnemonic(KeyEvent.VK_E);
         editMenu.getAccessibleContext().setAccessibleDescription("The Edit Menu Item");
         menuBar.add(editMenu);
         
+        /****************
+		 * Help Menu Item Creation
+		 ****************/
         helpMenu.setMnemonic(KeyEvent.VK_H);
         helpMenu.getAccessibleContext().setAccessibleDescription("The Help Menu Item");
         menuBar.add(helpMenu);
@@ -135,24 +158,44 @@ public class RecipeFrame extends JFrame{
 			}
 			if(arg0.getActionCommand().equals("Print")){
 				System.out.println("Print");
+				
 			}
 			if(arg0.getActionCommand().equals("Edit")){
-				System.out.println("Edit");
+//				System.out.println("Edit");
+				
 			}
 //			String[] recipeTypeArray = {"Dessert", "CrockPot", "Main Dish", "Appetizer", "Breads", "Soups", "Salads"};
 			if(arg0.getSource().toString().contains("Dessert")){
 				
 				
-//				String tempName = "poptartums";
-//				RecipeType[] type = {RecipeType.Snack};
-//				String[] tempIngerd = {"1C. water", "2lbs. pop", "3 tart", "4 umms", "5 ughs", "6skjdhf"};
-//				String[] tempInstru = {"add the water and the pop----------- ------------------------------ --------------------------------------------------words", 
-//						"then add the tarts----------------- ---------------------- ----------------------------------- ----------------words", 
-//						"then add the umms-------- ------------------------------- ------------------------------------ ----------------words", 
-//						"cook for 20 minutes---------------- ------------------------------- ----------------------- ---------------------words"};
-//				Recipe recipe = new Recipe(tempName, tempIngerd, tempInstru, type);
-//				
+				
+				
 //				inputBox.append(recipe.SaveRecipe());
+			}
+		}
+		
+	}
+	
+	private class MenuListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			JMenuItem source = (JMenuItem)(arg0.getSource());
+			if(source.getText().equalsIgnoreCase("Save Recipe")){
+				String tempName = "poptartums";
+				RecipeType[] type = {RecipeType.Snack};
+				String[] tempIngerd = {"1C. water", "2lbs. pop", "3 tart", "4 umms", "5 ughs", "6skjdhf"};
+				String[] tempInstru = {"add the water and the pop----------- ------------------------------ --------------------------------------------------words", 
+						"then add the tarts----------------- ---------------------- ----------------------------------- ----------------words", 
+						"then add the umms-------- ------------------------------- ------------------------------------ ----------------words", 
+						"cook for 20 minutes---------------- ------------------------------- ----------------------- ---------------------words"};
+				Recipe recipe = new Recipe(tempName, tempIngerd, tempInstru, type);
+				List<Recipe> recipes = new ArrayList<Recipe>();
+				recipes.add(recipe);
+				IOClass.SaveRecipes(recipes);
+			}
+			if(source.getText().equalsIgnoreCase("Load Recipe")){
+				System.out.println("not implemented yet");
 			}
 		}
 		
