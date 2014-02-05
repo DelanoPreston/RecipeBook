@@ -86,6 +86,11 @@ public class RecipeFrame extends JFrame{
         editMenu.getAccessibleContext().setAccessibleDescription("The Edit Menu Item");
         menuBar.add(editMenu);
         
+        tempMI = new JMenuItem("Change Directory");
+        tempMI.getAccessibleContext().setAccessibleDescription("The Change Directory Edit Menu Item");
+        tempMI.addActionListener(menuListener);
+        editMenu.add(tempMI);
+        
         /****************
 		 * Help Menu Item Creation
 		 ****************/
@@ -212,20 +217,20 @@ temp.addActionListener(buttonListener);
 		public void actionPerformed(ActionEvent arg0) {
 			JMenuItem source = (JMenuItem)(arg0.getSource());
 			if(source.getText().equalsIgnoreCase("Save Recipe")){
-				IOClass.SaveRecipes(recipes);
-			}
-			if(source.getText().equalsIgnoreCase("Load Recipe")){
+				if(recipes.size() > 0)
+					IOClass.SaveRecipes(recipes);
+			}else if(source.getText().equalsIgnoreCase("Load Recipe")){
 				List<String> recipesToLoad = new ArrayList<String>();
 				recipesToLoad.add("Chicken");
+				recipesToLoad.add("wonderBread");
 				recipes = IOClass.LoadRecipes(recipesToLoad);
-			}
-			if(source.getText().equalsIgnoreCase("Refresh Recipes")){
+			}else if(source.getText().equalsIgnoreCase("Refresh Recipes")){
 				inputBox.setText("");
+			}else if(source.getText().equalsIgnoreCase("Exit")){
+				System.exit(0);
+			}else if(source.getText().equalsIgnoreCase("Change Directory")){
+				System.out.println("load a path extension changer");
 			}
-			if(source.getText().equalsIgnoreCase("Exit")){
-				
-			}
-			
 			
 		}
 		
