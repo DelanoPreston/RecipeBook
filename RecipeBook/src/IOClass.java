@@ -10,18 +10,25 @@ import java.util.Scanner;
 
 public class IOClass {
 	
+	private static String path;
+	
+	public IOClass(String inPath){
+		path = inPath;
+	}
+	
 	public static Boolean SaveRecipes(List<Recipe> recipes){
 		for(int i = 0; i < recipes.size(); i++){
 			Properties recipeProps = new Properties();
-			FileOutputStream out;
+			FileOutputStream out = null;
 			recipeProps.setProperty("RecipeType" , CreateArrayString(recipes.get(i).type));
 			recipeProps.setProperty("Ingredients" , CreateArrayString(recipes.get(i).ingredients));
 			recipeProps.setProperty("Instruction" , CreateArrayString(recipes.get(i).instructions));
 			
 			try {
-//				out = new FileOutputStream(new File("Recipes/" + recipes.get(i).name + ".prop"));
-				out = new FileOutputStream(new File(System.getProperty("user.home") + "\\My Documents\\Recipes\\" + recipes.get(i).name + ".prop"));
-//				System.out.println(System.getProperty("user.home") + "\\My Documents\\");
+				File filePath = new File(path);
+				if(!filePath.exists())
+					filePath.mkdirs();
+				out = new FileOutputStream(new File(path + "\\" + recipes.get(i).name + ".prop"));
 				recipeProps.store(out, "---No Comment---");
 				out.close();
 			} catch (IOException e) {

@@ -32,6 +32,7 @@ public class RecipeFrame extends JFrame{
 	public RecipeFrame(String frameName){
 		this.setTitle(frameName);
 		CreateLayout();
+		new IOClass(System.getProperty("user.home") + "\\My Documents\\Recipes");
 	}
 	
 	/**
