@@ -38,7 +38,6 @@ public class RecipeFrame extends JFrame{
 	/**
 	 * this method creates the GUI
 	 */
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private void CreateLayout(){
 		this.setLayout(new BorderLayout());
 		
@@ -131,7 +130,7 @@ public class RecipeFrame extends JFrame{
 		
 		//create drop down
 		String[] recipeTypeArray = {"Dessert", "CrockPot", "Main Dish", "Appetizer", "Breads", "Soups", "Salads"};
-		JComboBox recipeTypeComboBox = new JComboBox(recipeTypeArray);
+		JComboBox<String> recipeTypeComboBox = new JComboBox<String>(recipeTypeArray);
 		recipeTypeComboBox.setSelectedIndex(0);
 		
 		//put text field and buttons on panel
@@ -151,16 +150,15 @@ public class RecipeFrame extends JFrame{
 		printButton.addActionListener(buttonListener);
 		editButton.addActionListener(buttonListener);
 		
-//////////////////////////////////////////////////////////////
-JButton temp = new JButton("temp");
-buttonPane.add(Box.createRigidArea(new Dimension(10, 0)));
-buttonPane.add(temp);
-temp.addActionListener(buttonListener);
-//////////////////////////////////////////////////////////////
+		//////////////////////////////////////////////////////////////
+		JButton temp = new JButton("temp");
+		buttonPane.add(Box.createRigidArea(new Dimension(10, 0)));
+		buttonPane.add(temp);
+		temp.addActionListener(buttonListener);
+		//////////////////////////////////////////////////////////////
 
 		this.add(buttonPane, BorderLayout.PAGE_END);
 		
-//		
 //		JPanel textButtonArea = new JPanel();
 //		textButtonArea.setLayout(new BorderLayout());
 ////		textButtonArea.add(commandBox, BorderLayout.CENTER);
